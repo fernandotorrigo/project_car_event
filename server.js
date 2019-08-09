@@ -15,6 +15,8 @@ requireDir("./src/models");
 
 const Contact = mongoose.model("Contact");
 
+const Schedule = mongoose.model("Schedule");
+
 app.use("/api", require("./src/routes"));//configurando require dinamico para routes
 
-app.listen(3001)
+app.listen(3001);
