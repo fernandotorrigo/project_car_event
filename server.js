@@ -9,6 +9,8 @@ mongoose.connect(
 
 const app = express();
 
+app.use(express.json());
+
 requireDir("./src/models");
 
 const Contact = mongoose.model("Contact");
