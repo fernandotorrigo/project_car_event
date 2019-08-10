@@ -1,21 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const requireDir = require("require-dir");
+const dbConfig = require('./config/database');//configuração do banco
 
-mongoose.connect(
-    'mongodb://localhost:27017/project_car_event',
-    { useNewUrlParser: true }
- );
+mongoose.connect(dbConfig.url, { 'useCreateIndex': true, useNewUrlParser: true });
 
 const app = express();
 
 app.use(express.json());
 
-requireDir("./src/models");
+requireDir(dbConfig.modelsPath);
 
 const Contact = mongoose.model("Contact");
 
 const Schedule = mongoose.model("Schedule");
+
+const User = mongoose.model("User");
 
 app.use("/api", require("./src/routes"));//configurando require dinamico para routes
 
