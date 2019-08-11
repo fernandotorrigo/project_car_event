@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 
 module.exports = {
-    async singin(req, res, next){
+    async signin(req, res, next){
         try{
             const { email, password } = req.body;
 
@@ -16,7 +16,7 @@ module.exports = {
             if(!await user.compareHash(password)){
                 return res.status(400).json({ error: 'Senha invalida'})
             }
-
+          
             return res.json({
                 user,
                 token: user.generateToken(),

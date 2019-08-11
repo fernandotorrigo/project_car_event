@@ -1,6 +1,19 @@
 //Arquivo de configuração de rotas
 const express = require('express');
 const routes = express.Router();
+const authMiddleware = require("./middlewares/auth");
+
+const AuthController = require("./controllers/AuthController");//Require do controller
+
+routes.post("/signin", AuthController.signin);//Criando novo user
+
+routes.use(authMiddleware);
+/**
+ * ==================
+ * ROTAS ABAIXO APENAS COM AUTHETICATION 
+ */
+
+
 
 //Routes for contacts
 const ContactController = require("./controllers/ContactController");//Require do controller
@@ -23,7 +36,6 @@ routes.post("/schedule", ScheduleController.create);//Criando novo schedule
 
 //routes for User
 const UserController = require("./controllers/UserController");//Require do controller
-const AuthController = require("./controllers/AuthController");//Require do controller
 
 routes.get("/users", UserController.index);//Acionando o metodo index do controller
 routes.get("/user/:id", UserController.showById);//Listar por id
@@ -31,6 +43,6 @@ routes.delete("/user/:id", UserController.removeById);//Remove por ID
 routes.put("/user/:id", UserController.updateById);//Update por id
 routes.post("/user", UserController.create);//Criando novo user
 
-routes.post("/singin", AuthController.singin);//Criando novo user
+
 
 module.exports = routes;
