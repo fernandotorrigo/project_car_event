@@ -10,11 +10,11 @@ module.exports = {
             const user = await User.findOne({email});
 
             if(!user){
-                return res.status(400).json({ error: 'Usuário invalido'})
+                return res.status(200).json({ error: 'Usuário invalido'})
             }
 
             if(!await user.compareHash(password)){
-                return res.status(400).json({ error: 'Senha invalida'})
+                return res.status(200).json({ error: 'Senha invalida'})
             }
           
             return res.json({

@@ -6,19 +6,19 @@ module.exports = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if(!authHeader){
-        return res.status(401).json({ error: 'Token inválido'});
+        return res.status(200).json({ error: 'Token inválido'});
     }
 
     const parts =  authHeader.split(' ');
 
     if(!parts.lenght === 2){
-        return res.status(401).json({ error: 'Len token inválido'});
+        return res.status(200).json({ error: 'Len token inválido'});
     }
 
     const [scheme, token] = parts;
 
     if(scheme != 'Bearer'){
-        return res.status(401).json({ error: 'Formato de token inválido'});
+        return res.status(200).json({ error: 'Formato de token inválido'});
     }
 
     try{
@@ -28,6 +28,6 @@ module.exports = async (req, res, next) => {
         return next();
 
     }catch(err){
-        return res.status(401).json({ error: "Token com erro:"+ err});
+        return res.status(200).json({ error: "Token com erro:"+ err});
     }
 }

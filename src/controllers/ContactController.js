@@ -4,7 +4,7 @@ const Contact = mongoose.model("Contact");
 
 module.exports = {
     async index(req, res) {
-        const contacts = await Contact.find();
+        const contacts = await Contact.find().sort({createdAt: -1});
         return res.json(contacts);
     },
 
